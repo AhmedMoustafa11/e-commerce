@@ -1,0 +1,331 @@
+<div class="container" >
+  <div class="mb-3 mt-3">
+    <div class="d-flex align-items-center justify-content-between" >
+
+
+
+      <mat-form-field appearance="fill" class="me-3">
+        <mat-label>Select  Category</mat-label>
+        <mat-select name="cat" id="prdCat" [(ngModel)]="selectCatId" (selectionChange)="getProductsByCat($event.value)">
+          <mat-option value="0">All</mat-option>
+          <mat-option *ngFor="let cat of catList" [value]="cat.id">{{cat.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+
+      <form class="form-inline d-flex align-items-center">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" #input  (keyup)="search(input.value)">
+      
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<section>
+  <div class="text-center container py-5">
+    <div class="row" *ngIf="!loading && prdListOfCat.length > 0">
+      <div class="col-lg-4 col-md-12 mb-4" *ngFor="let prd of prdListOfCat; let i = index; trackBy: prdTrackBnFn">
+        <div class="card card-background">
+          <div class="bg-image">
+            <img [src]="prd.imageUrl" [routerLink]="['/products/products', prd.id]"  class="w-100" />
+            <a [routerLink]="['/products/products', prd.id]" >
+              <div class="mask">
+                <div class="d-flex justify-content-start align-items-end h-100">
+                  <h3>
+                    <span class="badge bg-primary ms-2">
+                      <ng-container [ngSwitch]="prd.quantity">
+                        <div *ngSwitchCase="0"> Out of Stock</div>
+                        <div *ngSwitchCase="1"> Last Item</div>
+                        <div *ngSwitchCase="2"> Last 2 Items</div>
+                        <div *ngSwitchDefault>Av.Quantity: {{prd.quantity}}</div>
+                      </ng-container>
+                    </span>
+                  </h3>
+                </div>
+              </div>
+              <div class="hover-overlay">
+                <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+              </div>
+            </a>
+          </div>
+          <div class="card-body">
+            <a [routerLink]="['/products/products', prd.id]"  class="text-reset">
+              <h3 class="card-title mb-3">{{prd.name}}</h3>
+            </a>
+            <h3 class="mb-3">{{prd.price | currency:'USD':'symbol'}}</h3>
+            <button class="btn"><i class="fa-solid fa-plus"></i></button>
+
+            <div class="mb-3">
+              <label for="count" class="form-label"></label>
+              <div class="custom-select-wrapper">
+
+                <mat-form-field appearance="fill">
+                  <mat-label>Select quantity:</mat-label>
+                  <mat-select id="count" #itemCount>
+                    <mat-option value="" disabled>Select quantity:</mat-option>
+                    <mat-option value="1">1</mat-option>
+                    <mat-option value="2">2</mat-option>
+                    <mat-option value="3">3</mat-option>
+                    <mat-option value="4">4</mat-option>
+                    <mat-option value="5">5</mat-option>
+                  </mat-select>
+                </mat-form-field>
+
+              </div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="example-button-row mt-3">
+                    <button mat-fab extended class="details-button" [routerLink]="['/products/products', prd.id]"   >
+                      <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up">
+                        <svg class="svg-icon" style="width: 20px; height: 20px; vertical-align: middle; fill: currentColor; overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M911.68 0h-800a64 64 0 0 0-64 64v896a64 64 0 0 0 64 64h800a64 64 0 0 0 64-64V64a64 64 0 0 0-64-64z m0 960h-800V64h800z"></path>
+                          <path d="M271.68 304.64h472a32 32 0 1 0 0-64h-472a32 32 0 0 0 0 64z m0 234.88h408.64a32 32 0 0 0 0-64H271.68a32 32 0 1 0 0 64z m0 198.4h376.64a32 32 0 1 0 0-64H271.68a32 32 0 0 0 0 64z"></path>
+                        </svg>
+                      </mat-icon>
+                      Details
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="example-button-row mt-3">
+                    <button mat-fab extended class="buy-button" (click)="buy(prd, itemCount.value)"      >
+                      <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up">
+                        <svg style="width: 25px; height: 25px" xmlns="http://www.w3.org/2000/svg" id="add" x="0" y="0" version="1.1" viewBox="0 0 29 29" xml:space="preserve">
+                          <path d="M14.5 2C7.596 2 2 7.596 2 14.5S7.596 27 14.5 27 27 21.404 27 14.5 21.404 2 14.5 2zM21 15.5h-5.5V21a1 1 0 1 1-2 0v-5.5H8a1 1 0 1 1 0-2h5.5V8a1 1 0 1 1 2 0v5.5H21a1 1 0 1 1 0 2z"></path>
+                        </svg>
+                      </mat-icon>
+                      Buy
+                    </button>
+                  </div>
+                </div>
+     
+                <div class="col-md-6">
+                  <div class="example-button-row  mt-3 mb-3">
+                    <button mat-fab extended data-bs-toggle="modal" data-bs-target="#updateProductModal" class="update-product" (click)="getProduct(prd)"  *ngIf="isAdminLogged">
+                      <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up">
+                        <svg class="feather feather-edit" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                      </mat-icon>
+                      Update 
+                    </button>
+                  </div>
+                </div>
+
+
+              <div class="col-md-6">
+                <div class="example-button-row  mt-3">
+                  <button mat-fab extended        aria-label="Delete Product"  class="delete-product"   (click)="delete(prd.id)"  *ngIf="isAdminLogged">
+                    <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24px" height="24px">
+                        <path d="M 10.806641 2 C 10.289641 2 9.7956875 2.2043125 9.4296875 2.5703125 L 9 3 L 4 3 A 1.0001 1.0001 0 1 0 4 5 L 20 5 A 1.0001 1.0001 0 1 0 20 3 L 15 3 L 14.570312 2.5703125 C 14.205312 2.2043125 13.710359 2 13.193359 2 L 10.806641 2 z M 4.3652344 7 L 5.8925781 20.263672 C 6.0245781 21.253672 6.877 22 7.875 22 L 16.123047 22 C 17.121047 22 17.974422 21.254859 18.107422 20.255859 L 19.634766 7 L 4.3652344 7 z"/>
+                      </svg>
+                    </mat-icon>
+                    Delete 
+                  </button>
+                </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div *ngIf="loading" class="d-flex justify-content-center">
+  <app-spinner></app-spinner>
+</div>
+
+
+
+<div *ngIf="prdListOfCat.length === 0 && searchFieldText" class="d-flex justify-content-center">
+  <b style="font-size: xx-large;">Sorry, nothing found with your search key.</b>
+</div>
+
+
+
+
+<div class="example-button-container">
+  <button mat-fab extended data-bs-toggle="modal" data-bs-target="#addProductModal"class="add-product "  *ngIf="isAdminLogged" >
+    <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up">
+      <svg xmlns="http://www.w3.org/2000/svg" id="add" x="0" y="0" version="1.1" viewBox="0 0 29 29" xml:space="preserve">
+        <path d="M14.5 2C7.596 2 2 7.596 2 14.5S7.596 27 14.5 27 27 21.404 27 14.5 21.404 2 14.5 2zM21 15.5h-5.5V21a1 1 0 1 1-2 0v-5.5H8a1 1 0 1 1 0-2h5.5V8a1 1 0 1 1 2 0v5.5H21a1 1 0 1 1 0 2z"></path>
+      </svg>
+    </mat-icon>
+    Add 
+  </button>
+</div>
+
+
+
+
+
+<div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="addProductModalLabel">Add Product Form</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="add()" [formGroup]="productForm">
+       
+          <div class="form-group m-2">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+          </div>
+          <div class="form-group m-2">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" formControlName="price">
+           
+          <small  *ngIf="price?.errors?.['pattern']">
+            price  Must Be Numbers  , <b>{{price?.errors?.['pattern'].actualValue}}</b> dosn't match
+          </small>
+      
+
+          </div>
+          <div class="form-group m-2">
+            <label for="quantity">Quantity</label>
+            <input type="text" class="form-control" id="quantity" formControlName="quantity">
+            <small  *ngIf="quantity?.errors?.['pattern']">
+              quantity Must Be Numbers  , <b>{{quantity?.errors?.['pattern'].actualValue}}</b> dosn't match
+             </small>
+
+
+          </div>
+          <div class="form-group m-2">
+            <label for="imageUrl">Image URL</label>
+            <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl">
+          </div>
+          <div class="form-group m-2">
+            <label for="categoryId">Category ID</label>
+            <input type="text" class="form-control" id="categoryId" formControlName="categoryId">
+
+            <small  *ngIf="categoryId?.errors?.['pattern']">
+              Category ID Must Be Numbers  , <b>{{categoryId?.errors?.['pattern'].actualValue}}</b> dosn't match
+             </small>
+
+          </div>
+          
+
+          <div class="container">
+            <div class="row">
+              <div class="col-md-6">
+            <div class="example-button-row  mt-3">
+              <div class="example-flex-container">
+                <div class="example-button-container">
+                  <button mat-fab extended data-bs-toggle="modal" data-bs-target="#addProductModal" [disabled]="productForm.invalid"   type="submit"  class="add-button">
+                    <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up">
+                      <svg xmlns="http://www.w3.org/2000/svg" id="add" x="0" y="0" version="1.1" viewBox="0 0 29 29" xml:space="preserve">
+                        <path d="M14.5 2C7.596 2 2 7.596 2 14.5S7.596 27 14.5 27 27 21.404 27 14.5 21.404 2 14.5 2zM21 15.5h-5.5V21a1 1 0 1 1-2 0v-5.5H8a1 1 0 1 1 0-2h5.5V8a1 1 0 1 1 2 0v5.5H21a1 1 0 1 1 0 2z"></path>
+                      </svg>
+                    </mat-icon>
+                    Add 
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+          <div class="example-button-row  mt-3">
+            <div class="example-flex-container">      
+              <div class="example-button-container">
+                <button mat-fab extended  data-bs-dismiss="modal"  type="button"  class="close-button" (click)="resetProductForm()" >
+                  <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up" >
+                    <svg class="svg-icon" style="width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M818.1 872.1c-15.4 0-30.7-5.9-42.4-17.6l-613-612.9c-23.4-23.4-23.4-61.4 0-84.9 23.4-23.4 61.4-23.4 84.9 0l612.9 612.9c23.4 23.4 23.4 61.4 0 84.9a59.914 59.914 0 0 1-42.4 17.6z" fill="" /><path d="M205.1 872.1c-15.4 0-30.7-5.9-42.4-17.6-23.4-23.4-23.4-61.4 0-84.9l612.9-612.9c23.4-23.4 61.4-23.4 84.9 0 23.4 23.4 23.4 61.4 0 84.9L247.6 854.5c-11.7 11.7-27.1 17.6-42.5 17.6z" fill="" /><path d="M818.1 872.1c-15.4 0-30.7-5.9-42.4-17.6l-613-612.9c-23.4-23.4-23.4-61.4 0-84.9 23.4-23.4 61.4-23.4 84.9 0l612.9 612.9c23.4 23.4 23.4 61.4 0 84.9a59.914 59.914 0 0 1-42.4 17.6z" fill="" /><path d="M205.1 872.1c-15.4 0-30.7-5.9-42.4-17.6-23.4-23.4-23.4-61.4 0-84.9l612.9-612.9c23.4-23.4 61.4-23.4 84.9 0 23.4 23.4 23.4 61.4 0 84.9L247.6 854.5c-11.7 11.7-27.1 17.6-42.5 17.6z" fill="" /><path d="M818.1 872.1c-15.4 0-30.7-5.9-42.4-17.6l-613-612.9c-23.4-23.4-23.4-61.4 0-84.9 23.4-23.4 61.4-23.4 84.9 0l612.9 612.9c23.4 23.4 23.4 61.4 0 84.9a59.914 59.914 0 0 1-42.4 17.6z" fill="" /><path d="M205.1 872.1c-15.4 0-30.7-5.9-42.4-17.6-23.4-23.4-23.4-61.4 0-84.9l612.9-612.9c23.4-23.4 61.4-23.4 84.9 0 23.4 23.4 23.4 61.4 0 84.9L247.6 854.5c-11.7 11.7-27.1 17.6-42.5 17.6z" fill="" /><path d="M818.1 872.1c-15.4 0-30.7-5.9-42.4-17.6l-613-612.9c-23.4-23.4-23.4-61.4 0-84.9 23.4-23.4 61.4-23.4 84.9 0l612.9 612.9c23.4 23.4 23.4 61.4 0 84.9a59.914 59.914 0 0 1-42.4 17.6z" fill="" /><path d="M205.1 872.1c-15.4 0-30.7-5.9-42.4-17.6-23.4-23.4-23.4-61.4 0-84.9l612.9-612.9c23.4-23.4 61.4-23.4 84.9 0 23.4 23.4 23.4 61.4 0 84.9L247.6 854.5c-11.7 11.7-27.1 17.6-42.5 17.6z" fill="" /></svg>             
+                  </mat-icon>
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</form>
+</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="modal fade" id="updateProductModal" tabindex="-1" aria-labelledby="updateProductModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="updateProductModalLabel">update Product Form</h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="update()" [formGroup]="updateProductForm">
+          
+    
+    
+           <div class="form-group m-2">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+          </div>
+
+          <div class="form-group m-2">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" formControlName="price">
+            <small  *ngIf="updatePrice?.errors?.['pattern']">
+              price  Must Be Numbers  , <b>{{updatePrice?.errors?.['pattern'].actualValue}}</b> dosn't match
+            </small>
+          
+            <div class="form-group ">
+            <label for="imageUrl">Image URL</label>
+            <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl">
+            </div>
+
+
+          </div>
+          <div class="form-group m-2">
+            <label for="quantity">Quantity</label>
+            <input type="text" class="form-control" id="quantity" formControlName="quantity">
+            <small  *ngIf="UpdateQuantity?.errors?.['pattern']">
+             quantity Must Be Numbers  , <b>{{UpdateQuantity?.errors?.['pattern'].actualValue}}</b> dosn't match
+            </small>
+          </div>
+
+
+         <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="example-button-row mt-3">
+                    <button mat-fab extended type="submit" class="submit-button">
+                      <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up">
+                        <svg class="feather feather-edit" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                        </svg>
+                      </mat-icon>
+                      Submit
+                    </button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="example-button-row mt-3">
+                    <button mat-fab extended data-bs-dismiss="modal" type="button" class="close-button" (click)="resetUpdateForm()">
+                      <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up">
+                        <svg class="svg-icon" style="width: 2em; height: 2em; vertical-align: middle; fill: currentColor; overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M818.1 872.1c-15.4 0-30.7-5.9-42.4-17.6l-613-612.9c-23.4-23.4-23.4-61.4 0-84.9 23.4-23.4 61.4-23.4 84.9 0l612.9 612.9c23.4 23.4 23.4 61.4 0 84.9a59.914 59.914 0 0 1-42.4 17.6z" fill=""/>
+                          <path d="M205.1 872.1c-15.4 0-30.7-5.9-42.4-17.6-23.4-23.4-23.4-61.4 0-84.9l612.9-612.9c23.4-23.4 61.4-23.4 84.9 0 23.4 23.4 23.4 61.4 0 84.9L247.6 854.5c-11.7 11.7-27.1 17.6-42.5 17.6z" fill=""/>
+                        </svg>
+                      </mat-icon>
+                     Cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+    

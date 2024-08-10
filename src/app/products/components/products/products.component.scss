@@ -1,0 +1,142 @@
+
+  .card {
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .bg-image {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .bg-image img {
+    transition: transform 0.5s ease;
+  }
+  
+  .bg-image:hover img {
+    transform: scale(1.1);
+  }
+  
+  .bg-image.hover-zoom {
+    position: relative;
+  }
+  
+  .bg-image.hover-zoom:hover {
+    cursor: pointer;
+  }
+
+
+
+  .buy-button {
+    background-color: #2f633d;
+    color: #ffffff;
+  }
+
+
+  .details-button {
+    background-color: #776e6e;
+    color: #ffffff;
+  }
+
+
+
+  .card{
+    border: 1px solid #ccc; 
+    padding: 20px; 
+    background-color: rgba(255, 255, 255, 0.5); 
+    backdrop-filter: blur(5px); 
+    border-radius: 16px; 
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  
+  }
+  
+  .card:hover {
+    background-color: rgba(255, 255, 255, 0.7); 
+  }
+  
+
+
+
+  .search-button {
+    background-color: #2bdad1;
+    color: #ffffff;
+  }
+
+
+
+  .close-button{
+
+    background-color: #726f6f;
+    color: #ffffff;
+
+}
+
+
+  
+  .submit-button{
+
+    background-color:red;
+    color: #ffffff;
+
+  }
+
+
+  
+  
+  .add-button{
+
+    background-color:red;
+    color: #ffffff;
+  }
+
+
+  .delete-product{
+
+    background-color: #d81818;
+    color: #ffffff;
+  
+  
+  }
+  
+  
+  .update-product{
+  
+    background-color: #230ee4;
+    color: #ffffff;
+  
+  
+  }
+  
+
+  .add-product{
+
+    background-color: #e40707;
+    color: #ffffff;
+    position: fixed;
+     bottom: 20px;
+    
+  
+  }
+  
+  
+
+
+  .loader {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: block;
+    margin:15px auto;
+    position: relative;
+    background: #FFF;
+    box-shadow: -24px 0 #FFF, 24px 0 #FFF;
+    box-sizing: border-box;
+    animation: shadowPulse 2s linear infinite;
+  }
+  
+
+
+
+
+
+

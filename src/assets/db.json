@@ -1,0 +1,171 @@
+{
+  "categories": [
+    {
+      "id": "1",
+      "name": "Laptops"
+    },
+    {
+      "id": "2",
+      "name": "Tablets"
+    },
+    {
+      "id": "3",
+      "name": "Mobiles"
+    },
+    {
+      "id": "4",
+      "name": "Accessories"
+    }
+  ],
+  "products": [
+    {
+      "id": "200",
+      "name": "Infinix Hot 40 Pro (RAM 8+8GB, ROM 256GB), 6.78 120Hz FHD+ Display, 108MP Portrait Rear Camera + 32MP Crystal-Clear Selfie Camera, 5000mAh Battery with 33W Fast Charging - Starlit Black Color",
+      "price": "30",
+      "quantity": 20,
+      "imageUrl": "https://m.media-amazon.com/images/I/515LGGv2bTL._AC_SX679_.jpg",
+      "categoryID": 3
+    },
+    {
+      "id": "400",
+      "name": "Samsung Mobile",
+      "price": 300,
+      "quantity": 1,
+      "imageUrl": "https://cf-images.dustin.eu/cdn-cgi/image/format=auto,quality=75,width=828,,fit=contain/image/d2000012739126/samsung-galaxy-s24-ultra-1000gb-grijs-titanium.png",
+      "categoryID": 3
+    },
+    {
+      "id": "500",
+      "name": "MateBook D 16",
+      "price": 2700,
+      "quantity": 0,
+      "imageUrl": "https://consumer.huawei.com/content/dam/huawei-cbg-site/me-africa/common/mkt/plp/laptops-new/matebook-d-16-card-1.jpg",
+      "categoryID": 1
+    },
+
+    {
+      "id": "500",
+      "name": "Tablet 10.1 Inch Android 3G Phone Tablets with 32GB Storage Dual Sim Card 5MP Camera, WiFi, Bluetooth, GPS, Quad Core, HD Touchscreen, Support 3G Phone Call (Black) : Buy Online at Best",
+      "price": 1500,
+      "quantity": 5,
+      "imageUrl": "https://m.media-amazon.com/images/I/51MFwU173IL._AC_UF894,1000_QL80_.jpg",
+      "categoryID": 2
+    },
+
+
+
+
+
+    {
+      "id": "600",
+      "name": "Honor Mobile",
+      "price": 200,
+      "quantity": 1,
+      "imageUrl": "https://m.media-amazon.com/images/I/61ICaf0FsEL._AC_UF1000,1000_QL80_.jpg",
+      "categoryID": 3
+    },
+    {
+      "id": "700",
+      "name": "Xiaomi Mobile",
+      "price": 150,
+      "quantity": 7,
+      "imageUrl": "https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1666598531.28686121.png?thumb=1&w=500&q=85",
+      "categoryID": "3"
+    },
+    {
+      "id": "800",
+      "name": "Sony Mobile",
+      "price": 800,
+      "quantity": 10,
+      "imageUrl": "https://img.etimg.com/thumb/width-1200,height-900,imgsize-601513,resizemode-75,msid-74297065/magazines/panache/sony-unveils-xperia-1-ii-with-triple-cameras-and-focus-on-professional-photo-features.jpg",
+      "categoryID": "3"
+    },
+    {
+      "id": "900",
+      "name": "RedmiMobile",
+      "price": 150,
+      "quantity": 40,
+      "imageUrl": "https://i05.appmifile.com/805_item_fr/12/05/2023/6e691436bd736f11e2e0a6161fcc45a9!400x400!85.png",
+      "categoryID": "3"
+    },
+    {
+      "id": "1000",
+      "name": "JOYROOM Magnetic Power Bank, 10000mAh Wireless Portable Charger with Ring Holder and USB-C, 20W PD Fast Charging Battery Pack, Compatible with iPhone iPhone 15/14/13/12 Pro/Pro Max/Plus/Mini, Blue",
+      "price": 60,
+      "quantity": 20,
+      "imageUrl": "https://m.media-amazon.com/images/I/61GbqhkXCrL._AC_UF894,1000_QL80_.jpg",
+      "categoryID": 4
+    }
+  ],
+  "users": [
+    {
+      "id": "7fb8",
+      "fullName": "ahmed",
+      "phoneNo": [
+        "01067083026",
+        "01067183026"
+      ],
+      "address": "cairo",
+      "email": "ahmed@gmail.com",
+      "password": "147258",
+      "confirmPassword": "147258"
+    },
+    {
+      "id": "f1d7",
+      "fullName": "mohamed",
+      "phoneNo": [
+        "1202674740",
+        "01067083026"
+      ],
+      "address": "cairo",
+      "email": "mohamed11@gmail.com",
+      "password": "124578",
+      "confirmPassword": "124578"
+    },
+    {
+      "id": "b8dc",
+      "fullName": "ahmed",
+      "phoneNo": [
+        "01007693520"
+      ],
+      "address": "cairo",
+      "email": "ahmed333@gmail.com",
+      "password": "33333",
+      "confirmPassword": "33333"
+    },
+    {
+      "id": "b727",
+      "fullName": "khalid",
+      "phoneNo": [
+        "0404716510",
+        "01007693520"
+      ],
+      "address": "zefta",
+      "email": "khalid@gmail.com",
+      "password": "369258",
+      "confirmPassword": "369258"
+    }
+  ],
+  "admins": [
+    {
+      "id": "7fb8",
+      "fullName": "ahmed",
+      "phoneNo": [
+        "01224342424"
+      ],
+      "address": "cairo",
+      "email": "ahmed2024@gmail.com",
+      "password": "124578"
+    },
+    {
+      "id": "7hb6",
+      "fullName": "Ibrahim",
+      "phoneNo": [
+        "01202674740"
+      ],
+      "address": "cairo",
+      "email": "Ibrahim@gmail.com",
+      "password": "20242024"
+    }
+  ]
+}

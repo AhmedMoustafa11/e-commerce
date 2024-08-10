@@ -1,0 +1,141 @@
+<div class="d-flex justify-content-center">
+  <form [formGroup]="profileForm" class="m-5 col-md-5 form" (ngSubmit)="edit()">
+    <div class="form-group">
+      <label for="fullName">Full Name</label>
+      <input type="text" class="form-control" id="fullName" formControlName="fullName"
+        [class.is-valid]="fullName?.valid" [class.is-invalid]="fullName?.invalid">
+
+        <div  class="alert alert-warning" [hidden]="fullName?.valid||fullName?.untouched"  >
+          <small  *ngIf="fullName?.errors?.['required']">
+           fullName is Required
+          </small>
+ 
+          <small  *ngIf="fullName?.errors?.['pattern']">
+           fullName Must Be 3 letters At Least , <b>{{fullName?.errors?.['pattern'].actualValue}}</b> dosn't match
+          </small>
+          </div>
+         </div>
+
+
+
+    <div class="form-group mt-3"  *ngFor="let phone of phoneNo.controls; let i= index"     formArrayName="phoneNo"     >
+      <label for="{{'phone-'+ i}}"   class="form-label"> Phone No.#{{i+1}}</label>
+ 
+
+     <input type="text" class="form-control" id="{{'phone-'+ i}}"  name="phone"   [formControlName]="i"  [class.is-valid]="phone?.valid"   [class.is-invalid]="phone?.invalid" > 
+
+
+      
+      <div  class="alert alert-warning" [hidden]="phone?.valid||phone?.untouched"  >
+        <small  *ngIf="phone?.errors?.['required']">
+          phone Number is Required
+        </small>
+
+        <small  *ngIf="phone?.errors?.['pattern']">
+          phone Number  Must Be Numbers  , <b>{{phone?.errors?.['pattern'].actualValue}}</b> dosn't match
+        </small>
+      </div>
+    </div>
+
+
+
+
+    <div class="form-group">
+      <label for="address">Address</label>
+      <input type="text" class="form-control" id="address" formControlName="address"
+        [class.is-valid]="address?.valid" [class.is-invalid]="address?.invalid">
+
+         
+        <div  class="alert alert-warning" [hidden]="address?.valid||address?.untouched"  >
+          <small  *ngIf="address?.errors?.['required']">
+            address is Required
+          </small>
+ 
+          <small  *ngIf="address?.errors?.['pattern']">
+            address   Must Be 3 letters At Least , <b>{{address?.errors?.['pattern'].actualValue}}</b> dosn't match
+          </small>
+        </div>
+      </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email"
+        [class.is-valid]="email?.valid" [class.is-invalid]="email?.invalid">
+
+  
+        <div  class="alert alert-warning" [hidden]="email?.valid||email?.untouched"  >
+          <small    *ngIf="email?.errors?.['required']"  >
+           Email is Required
+          </small>
+ 
+          <small    *ngIf="email?.errors?.['EmailNotValid']"  >
+            
+           Email must contain "&#64;"<b>{{email?.errors?.['EmailNotValid'].value}}</b> dosn't match
+          </small>
+         </div>
+         </div>
+
+
+         <div >
+          <label for="password">Password</label>
+          <input type="password" class="form-control" id="password" formControlName="password"  [class.is-valid]="password?.valid"  [class.is-invalid]="password?.invalid"  >
+  
+          <div class="alert alert-warning  "  [hidden]="password?.valid ||password?.untouched">
+           <small    *ngIf="password?.errors?.['required']" >
+            password is Required
+           </small>
+  
+           <small    *ngIf="profileForm?.errors?.['PasswordContainFullName']" >
+            password mustn't contain full name  <b>{{profileForm.errors?.['PasswordContainFullName'].value}}</b>
+           </small>
+  
+          </div>
+        </div>
+  
+  
+  
+        <div >
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword"     [class.is-invalid]="confirmPassword?.invalid"    [class.is-valid]="!profileForm.errors?.['UnMatchedPassword'] "      >
+  
+          <small   class="alert alert-warning "  *ngIf="confirmPassword?.errors?.['required'] && confirmPassword?.touched "  >
+              
+            confirmPassword is Required
+          
+          </small>
+  
+          <small  class="alert alert-warning "  *ngIf="profileForm?.errors?.['UnMatchedPassword'] " >
+  
+            password and confirm password don't match <b>{{profileForm.errors?.['UnMatchedPassword'].value}}</b>
+          
+          </small>
+  
+        </div>
+ 
+
+
+
+
+
+
+
+
+    <div class="example-button-row mt-3">
+      <div class="example-flex-container">
+        <div class="example-button-container">
+          <button mat-fab extended style="margin: 50px;"  type="submit">
+            <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up">
+
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M21.0477 3.05293C18.8697 0.707363 2.48648 6.4532 2.50001 8.551C2.51535 10.9299 8.89809 11.6617 10.6672 12.1581C11.7311 12.4565 12.016 12.7625 12.2613 13.8781C13.3723 18.9305 13.9301 21.4435 15.2014 21.4996C17.2278 21.5892 23.1733 5.342 21.0477 3.05293Z" stroke="currentColor" stroke-width="1.5" />
+                <path d="M11.5 12.5L15 9" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+
+            </mat-icon>
+             Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

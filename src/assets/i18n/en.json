@@ -1,0 +1,36 @@
+{
+
+   "Home": "Home",
+   "Login": "Login",
+   "Products": " Products",
+   "Cart": "Cart",
+   "Registration": "Registration",
+   "© 2024 Copyright": "© 2024 Copyright",
+   "About": "About",
+  "Contact Us":"Contact Us",
+  "User name":  "User name",
+  "Address":"Address",
+  "Password":"Password",
+  "Confirm Password":"Confirm Password",
+  "Remember me":  "Remember me",
+  "forget password?":"forget password?",
+ 
+  "Don't have an account?":"Don't have an account?",
+
+  "Full Name": "Full Name",
+ 
+  "Male":"Male",
+  "Female":  "Female",
+  "City":  "City",
+  "phoneNo":"phoneNo",
+
+  " photo": " photo",
+  " Email":" Email",
+  " Submit": " Submit",
+  "Agree to terms and conditions": "Agree to terms and conditions",
+  "Send":"Send",
+  "save": "save",
+  "Resend":"Resend"
+
+
+ }

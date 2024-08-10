@@ -1,0 +1,38 @@
+
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+
+body { height: 100%; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #b5e296ec;}
+
+
+
+
+ .form-control.ng-valid:not(form) {
+  border-left: 5px solid #42A948;
+}
+.form-control.ng-invalid:not(form) {
+    border-left: 5px solid #a94442; 
+  }
+
+
+
+  
+.form  {
+  border: 1px solid #ccc; 
+  padding: 20px; 
+  background-color: rgba(255, 255, 255, 0.5); 
+  backdrop-filter: blur(5px); 
+  border-radius: 16px; 
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+
+}
+
+.form:hover {
+  background-color: rgba(255, 255, 255, 0.7); 
+}
+
+
+
+

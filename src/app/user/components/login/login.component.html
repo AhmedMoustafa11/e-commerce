@@ -1,0 +1,59 @@
+
+<div class="d-flex    justify-content-center    mt-5" >
+
+
+    <form [formGroup]="loginForm" class=" col-md-3  form" (ngSubmit)="login()"    >
+        <div class="form-row">
+          <div >
+    
+        
+
+
+            <div class="form-row ">
+              <div >
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" formControlName="email"   >
+                 
+                <div  class="alert alert-warning" [hidden]="email?.valid||email?.untouched"  >
+                 <small    *ngIf="email?.errors?.['required']"  >
+                  Email is Required
+                 </small>
+
+                 <small    *ngIf="email?.errors?.['EmailNotValid']"  >
+           
+                  Email must contain "&#64;"<b>{{email?.errors?.['EmailNotValid'].value}}</b> dosn't match
+                 </small>
+        
+                </div>
+              </div>
+            </div>
+
+
+          <div  >
+            <label for="password" class="mt-3" >Password</label>
+            <input type="password" class="form-control  " id="password" formControlName="password" >
+    
+            <div class="alert alert-warning  "  [hidden]="password?.valid ||password?.untouched">
+             <small    *ngIf="password?.errors?.['required']"  >
+              password is Required
+             </small>
+             
+            </div>
+       
+    <div class="example-button-row mt-3">
+      <div class="example-flex-container">
+        <div class="example-button-container">
+          <button mat-fab extended style="margin: 50px;" type="submit"    >
+            <mat-icon class="mat-icon-rtl-mirror" svgIcon="thumb-up">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="login"><path d="m15.53,11.47l-3-3c-.29-.29-.77-.29-1.06,0s-.29.77,0,1.06l1.72,1.72H4c-.41,0-.75.34-.75.75s.34.75.75.75h9.19l-1.72,1.72c-.29.29-.29.77,0,1.06.15.15.34.22.53.22s.38-.07.53-.22l3-3c.29-.29.29-.77,0-1.06Z"></path><path d="m18,3.25h-3c-.41,0-.75.34-.75.75s.34.75.75.75h3c.69,0,1.25.56,1.25,1.25v12c0,.69-.56,1.25-1.25,1.25h-3c-.41,0-.75.34-.75.75s.34.75.75.75h3c1.52,0,2.75-1.23,2.75-2.75V6c0-1.52-1.23-2.75-2.75-2.75Z"></path></svg>            </mat-icon>
+             Login
+          </button>
+         </div>
+         </div>
+        </div>
+       </div>
+      </div> 
+    </div>  
+   </form>
+  </div>
+

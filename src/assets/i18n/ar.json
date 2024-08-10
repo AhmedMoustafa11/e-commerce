@@ -1,0 +1,37 @@
+{
+
+    "Home": "الصفحة الرئيسية",
+    "Login": "تسجيل الدخول",
+    "Products": " المنتجات",
+    "Cart": "السلة ",
+    "Registration": "التسجيل",
+    "© 2024 Copyright": "© 2024 جميع الحقوق محفوظة",
+    "About": "نبذه عنا",
+    "Contact Us": "تواصل معنا",
+    "User name":"اسم المستخدم",
+    "Address":"العنوان",
+    "Password":"الرقم السرى",
+    "Confirm Password":"تاكيد الرقم السرى",
+    "Remember me":  "تذكرنى",
+   "forget password?":"نسيت الرقم السرى؟",
+
+  "Don't have an account?":"ليس لديك حساب؟",
+  "First name": "الاسم الاول",
+  "Last name": "الاسم الاخير",
+  "Male":"ذكر",
+  "Female":  "انثى",
+  "City":  "المدينة",
+  "phone number":"رقم الموبايل",
+  "Job":  "الوظيفة",
+  "HR": "مسؤل الموارد البشرية",
+  
+  "Engineer": "مهندس",
+  " photo": " الصورة الشخصية",
+  " Email":" البريد الالكترونى",
+  " Submit": " تسجيل",
+  "Agree to terms and conditions":"الموافقة على الشروط والأحكام",
+  "Send":"ارسال",
+  "save":"حفظ",
+  "Resend":"اعادة ارسال"
+
+}
